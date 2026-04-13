@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+}
+
+model Zap {
+  id        String   @id @default(uuid())
+  triggerId String
+  trigger   Trigger?
+}
+
+model Trigger {
+  id        String            @id @default(uuid())
+  zapId     String            @unique
+  triggerId String
+  type      AvailableTriggers @relation(fields: [triggerId], references: [id])
+  zaps      Zap               @relation(fields: [zapId], references: [id])
+}
+
+model AvailableTriggers {
+  id       String    @id @default(uuid())
+  name     String
+  triggers Trigger[]
+}
