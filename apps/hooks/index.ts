@@ -12,14 +12,14 @@ app.post("/hooks/catch/:userId/:syncId", async (req, res) => {
 
   // store in db a new trigger
   await prisma.$transaction(async (tx) => {
-    const run = await prisma.syncRun.create({
+    const run = await tx.syncRun.create({
       data: {
         syncId,
         metadata: body,
       },
     })
 
-    await prisma.syncRunOutbox.create({
+    await tx.syncRunOutbox.create({
       data: {
         syncRunId: run.id,
       },
