@@ -37,7 +37,6 @@ model Trigger {
   type               AvailableTrigger @relation(fields: [availableTriggerId], references: [id])
   syncId             String           @unique
   sync               Sync             @relation(fields: [syncId], references: [id])
-  sortingOrder       Int              @default(0)
 }
 
 model AvailableAction {
@@ -47,11 +46,12 @@ model AvailableAction {
 }
 
 model Action {
-  id       String          @id @default(uuid())
-  actionId String
-  type     AvailableAction @relation(fields: [actionId], references: [id])
-  syncId   String
-  sync     Sync            @relation(fields: [syncId], references: [id])
+  id           String          @id @default(uuid())
+  actionId     String
+  type         AvailableAction @relation(fields: [actionId], references: [id])
+  syncId       String
+  sync         Sync            @relation(fields: [syncId], references: [id])
+  sortingOrder Int             @default(0)
 }
 
 model SyncRun {
