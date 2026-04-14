@@ -1,11 +1,15 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
+
+// NOTE --> Sync === Zap (like Zapier does)
 
 model User {
   id       String @id @default(uuid())
@@ -14,22 +18,51 @@ model User {
   password String
 }
 
-model Zap {
-  id        String   @id @default(uuid())
-  triggerId String
-  trigger   Trigger?
+model Sync {
+  id       String    @id @default(uuid())
+  trigger  Trigger?
+  actions  Action[]
+  syncRuns syncRun[]
 }
 
-model Trigger {
-  id        String            @id @default(uuid())
-  zapId     String            @unique
-  triggerId String
-  type      AvailableTriggers @relation(fields: [triggerId], references: [id])
-  zaps      Zap               @relation(fields: [zapId], references: [id])
-}
-
-model AvailableTriggers {
+model AvailableTrigger {
   id       String    @id @default(uuid())
   name     String
   triggers Trigger[]
+}
+
+model Trigger {
+  id        String           @id @default(uuid())
+  triggerId String
+  type      AvailableTrigger @relation(fields: [triggerId], references: [id])
+  syncId    String           @unique
+  sync      Sync             @relation(fields: [syncId], references: [id])
+}
+
+model AvailableAction {
+  id      String   @id @default(uuid())
+  name    String
+  actions Action[]
+}
+
+model Action {
+  id       String          @id @default(uuid())
+  actionId String
+  type     AvailableAction @relation(fields: [actionId], references: [id])
+  syncId   String
+  sync     Sync            @relation(fields: [syncId], references: [id])
+}
+
+model syncRun {
+  id           String         @id @default(uuid())
+  syncId       String
+  sync         Sync           @relation(fields: [syncId], references: [id])
+  metadata     Json
+  zapRunOutbox SyncRunOutbox?
+}
+
+model SyncRunOutbox {
+  id        String  @id @default(uuid())
+  syncRunId String  @unique
+  syncRun   syncRun @relation(fields: [syncRunId], references: [id])
 }
