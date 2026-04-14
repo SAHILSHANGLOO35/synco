@@ -22,7 +22,7 @@ model Sync {
   id       String    @id @default(uuid())
   trigger  Trigger?
   actions  Action[]
-  syncRuns syncRun[]
+  syncRuns SyncRun[]
 }
 
 model AvailableTrigger {
@@ -32,11 +32,12 @@ model AvailableTrigger {
 }
 
 model Trigger {
-  id        String           @id @default(uuid())
-  triggerId String
-  type      AvailableTrigger @relation(fields: [triggerId], references: [id])
-  syncId    String           @unique
-  sync      Sync             @relation(fields: [syncId], references: [id])
+  id                 String           @id @default(uuid())
+  availableTriggerId String
+  type               AvailableTrigger @relation(fields: [availableTriggerId], references: [id])
+  syncId             String           @unique
+  sync               Sync             @relation(fields: [syncId], references: [id])
+  sortingOrder       Int              @default(0)
 }
 
 model AvailableAction {
@@ -53,7 +54,7 @@ model Action {
   sync     Sync            @relation(fields: [syncId], references: [id])
 }
 
-model syncRun {
+model SyncRun {
   id           String         @id @default(uuid())
   syncId       String
   sync         Sync           @relation(fields: [syncId], references: [id])
@@ -64,5 +65,5 @@ model syncRun {
 model SyncRunOutbox {
   id        String  @id @default(uuid())
   syncRunId String  @unique
-  syncRun   syncRun @relation(fields: [syncRunId], references: [id])
+  syncRun   SyncRun @relation(fields: [syncRunId], references: [id])
 }
