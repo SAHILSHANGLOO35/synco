@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express"
-import jwt from "jsonwebtoken"
+import jwt, { type JwtPayload } from "jsonwebtoken"
 
 export const authMiddleware = async (
   req: Request,
@@ -15,9 +15,10 @@ export const authMiddleware = async (
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
-      userId: string
-    }
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload
 
     req.userId = decoded.userId
   } catch (error) {
