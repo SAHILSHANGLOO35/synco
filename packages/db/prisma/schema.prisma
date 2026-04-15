@@ -55,11 +55,11 @@ model Action {
 }
 
 model SyncRun {
-  id           String         @id @default(uuid())
-  syncId       String
-  sync         Sync           @relation(fields: [syncId], references: [id])
-  metadata     Json
-  zapRunOutbox SyncRunOutbox?
+  id            String         @id @default(uuid())
+  syncId        String
+  sync          Sync           @relation(fields: [syncId], references: [id])
+  metadata      Json
+  syncRunOutbox SyncRunOutbox?
 }
 
 model SyncRunOutbox {
