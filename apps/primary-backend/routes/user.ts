@@ -71,7 +71,15 @@ router.post("/signin", async (req, res) => {
       { expiresIn: "7d" }
     )
 
-    return res.status(200).json({ token })
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    })
+
+    return res.status(200).json({
+      message: "Signin successful",
+    })
   } catch (err) {
     return res.status(500).json({
       message: "Something went wrong during signin",

@@ -1,11 +1,13 @@
 import express from "express"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 import userRouter from "./routes/user"
 import syncRouter from "./routes/sync"
 
 const app = express()
-app.use(cors({ origin: "http://localhost:3000" }))
+app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 app.use(express.json())
+app.use(cookieParser())
 
 app.get("/health", (req, res) => {
   res.status(200).json({
