@@ -4,7 +4,9 @@ import { prisma } from "db/client"
 
 dotenv.config()
 const app = express()
-const PORT = process.env.PORT || 3001
+app.use(express.json())
+
+const PORT = process.env.PORT
 
 app.post("/hooks/catch/:userId/:syncId", async (req, res) => {
   const { userId, syncId } = req.params
