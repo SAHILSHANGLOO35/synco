@@ -9,13 +9,14 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// NOTE --> Sync === Zap (like Zapier does)
+// NOTE --> Sync === Zap (like Zapier does by letting us create a zap)
 
 model User {
   id       String @id @default(uuid())
   name     String
   email    String @unique
   password String
+  syncs    Sync[]
 }
 
 model Sync {
@@ -23,35 +24,8 @@ model Sync {
   trigger  Trigger?
   actions  Action[]
   syncRuns SyncRun[]
-}
-
-model AvailableTrigger {
-  id       String    @id @default(uuid())
-  name     String
-  triggers Trigger[]
-}
-
-model Trigger {
-  id                 String           @id @default(uuid())
-  availableTriggerId String
-  type               AvailableTrigger @relation(fields: [availableTriggerId], references: [id])
-  syncId             String           @unique
-  sync               Sync             @relation(fields: [syncId], references: [id])
-}
-
-model AvailableAction {
-  id      String   @id @default(uuid())
-  name    String
-  actions Action[]
-}
-
-model Action {
-  id           String          @id @default(uuid())
-  actionId     String
-  type         AvailableAction @relation(fields: [actionId], references: [id])
-  syncId       String
-  sync         Sync            @relation(fields: [syncId], references: [id])
-  sortingOrder Int             @default(0)
+  userId   String
+  user     User      @relation(fields: [userId], references: [id])
 }
 
 model SyncRun {
@@ -66,4 +40,35 @@ model SyncRunOutbox {
   id        String  @id @default(uuid())
   syncRunId String  @unique
   syncRun   SyncRun @relation(fields: [syncRunId], references: [id])
+}
+
+model AvailableTrigger {
+  id       String    @id @default(uuid())
+  name     String
+  triggers Trigger[]
+}
+
+model Trigger {
+  id                 String           @id @default(uuid())
+  availableTriggerId String
+  type               AvailableTrigger @relation(fields: [availableTriggerId], references: [id])
+  syncId             String           @unique
+  sync               Sync             @relation(fields: [syncId], references: [id])
+  metadata           Json?
+}
+
+model AvailableAction {
+  id      String   @id @default(uuid())
+  name    String
+  actions Action[]
+}
+
+model Action {
+  id                String          @id @default(uuid())
+  availableActionId String
+  type              AvailableAction @relation(fields: [availableActionId], references: [id])
+  syncId            String
+  sync              Sync            @relation(fields: [syncId], references: [id])
+  sortingOrder      Int             @default(0)
+  metadata          Json?
 }
