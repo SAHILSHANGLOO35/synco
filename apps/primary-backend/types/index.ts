@@ -34,3 +34,27 @@ export const SigninSchema = SignupSchema.pick({
   email: true,
   password: true,
 })
+
+export const syncCreateSchema = z.object({
+  availableTriggerId: z
+    .string()
+    .min(1, { message: "Trigger ID is required" })
+    .uuid({ message: "Invalid trigger ID format" }),
+
+  triggerMetadata: z
+    .record(z.string(), z.unknown()) // object with key-value pairs
+    .optional(),
+
+  actions: z
+    .array(
+      z.object({
+        availableActionId: z
+          .string()
+          .min(1, { message: "Action ID is required" })
+          .uuid({ message: "Invalid action ID format" }),
+
+        actionMetadata: z.record(z.string(), z.unknown()).optional(),
+      })
+    )
+    .min(1, { message: "At least one action is required" }),
+})

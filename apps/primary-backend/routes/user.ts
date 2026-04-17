@@ -42,6 +42,8 @@ router.post("/signup", async (req, res) => {
       },
     })
 
+    // await sendEmail()
+
     return res.status(201).json({
       message: `User created successfully!`,
     })
@@ -109,11 +111,37 @@ router.post("/signin", async (req, res) => {
   } catch (err: any) {
     console.error(err)
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Something went wrong during signin",
     })
   }
 })
 
-router.get("/user", authMiddleware, (req, res) => {})
+router.get("/", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.userId
+
+    const isExistingUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        name: true,
+        email: true,
+      },
+    })
+
+    if (!isExistingUser) {
+      return res.status(404).json({
+        message: "User not found!",
+      })
+    }
+
+    return res.status(200).json({
+      User: isExistingUser,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: "Something went wrong while getting the user",
+    })
+  }
+})
 
 export default router
