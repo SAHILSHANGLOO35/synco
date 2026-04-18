@@ -1,4 +1,5 @@
 import { Container } from "./container"
+import { TabularInfo } from "./tabular-info"
 
 export const Hero = () => {
   return (
@@ -32,6 +33,8 @@ export const Hero = () => {
             Watch Demo
           </button>
         </div>
+
+        <TabularInfo />
       </div>
     </Container>
   )
