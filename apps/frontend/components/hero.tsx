@@ -40,7 +40,7 @@ export const Hero = () => {
             <span className="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-rose-600"></span>
             <span className="absolute top-0 right-0 h-2 w-2 border-t border-r border-rose-600"></span>
             <span className="absolute right-0 bottom-0 h-2 w-2 border-r border-b border-rose-600"></span>
-            Watch Demo
+            <span className="relative z-10">Watch Demo</span>
           </button>
         </div>
 
