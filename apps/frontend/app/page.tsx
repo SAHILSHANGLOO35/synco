@@ -36,6 +36,9 @@ export default function Home() {
           </div>
         </div>
         <Separator />
+        <div className="pt-16">
+          <Hero />
+        </div>
       </div>
     </div>
   )
