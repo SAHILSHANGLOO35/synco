@@ -5,7 +5,7 @@ export const Hero = () => {
   return (
     <Container>
       <div className="flex flex-col items-center gap-5 font-red-hat-display">
-        <div className="font-sans text-xs text-white uppercase">
+        <div className="font-sans text-xs font-semibold text-white uppercase">
           no code automation
         </div>
 

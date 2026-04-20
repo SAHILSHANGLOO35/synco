@@ -3,7 +3,7 @@ export const TabularInfo = () => {
     <div className="mx-auto mt-5 max-w-6xl">
       <div className="border border-rose-600">
         <div className="flex h-24 items-center border-b border-rose-500 bg-rose-600/15 px-2 text-3xl font-bold tracking-wide text-white uppercase sm:px-4 md:px-8">
-          synco
+          syn <span className="text-rose-500">co</span>
         </div>
 
         <div className="grid w-full grid-cols-4 border-b border-rose-500 sm:px-4 md:px-8">
