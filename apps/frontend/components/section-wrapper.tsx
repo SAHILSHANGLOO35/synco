@@ -50,17 +50,18 @@ export const SectionWrapper = ({
             className="absolute right-0 bottom-0 z-20 h-[88%] w-[90%] translate-x-1 translate-y-1 rounded-tl-lg object-cover object-top-left"
           />
         </div>
+
         <div className="flex flex-col justify-center gap-6 bg-[#121212] p-16">
           <div className="flex items-center gap-1 text-xs text-rose-500">
             <Icon size={18} />
-            <span className="text-xs font-semibold text-rose-500 uppercase">
+            <span className="text-[14px] font-semibold text-rose-500 uppercase">
               {subtitle}
             </span>
           </div>
           <h1 className="text-5xl font-bold tracking-wide text-white">
             {title}
           </h1>
-          <p className="text-base font-medium text-neutral-500">
+          <p className="font-medium text-muted-foreground md:text-base">
             {description}
           </p>
           <Link

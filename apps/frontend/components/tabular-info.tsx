@@ -1,10 +1,11 @@
-import { MoveRight } from "lucide-react"
+import { MoveRight, WorkflowIcon } from "lucide-react"
 
 export const TabularInfo = () => {
   return (
     <div className="mx-auto mt-5 max-w-6xl">
       <div className="border border-rose-600">
         <div className="flex h-24 items-center border-b border-rose-500 bg-rose-600/15 px-2 text-3xl font-bold tracking-wide text-white uppercase sm:px-4 md:px-8">
+          <WorkflowIcon className="mr-2 text-rose-500" size={28} />
           syn <span className="text-rose-500">co</span>
         </div>
 
@@ -91,7 +92,7 @@ export const TabularInfo = () => {
               </span>
               Actions
             </div>
-            <div className="mt-2 font-medium text-white/90">
+            <div className="mt-2 text-white">
               Define once. Run automatically
             </div>
           </div>
@@ -100,7 +101,7 @@ export const TabularInfo = () => {
             <div className="flex items-center gap-2 text-3xl font-bold text-rose-500">
               Real - Time
             </div>
-            <div className="mt-2 font-medium text-white/90">
+            <div className="mt-2 text-white">
               Syncs start the moment events arrive.
             </div>
           </div>
@@ -109,7 +110,7 @@ export const TabularInfo = () => {
             <div className="flex items-center gap-2 text-3xl font-bold text-rose-500">
               Ordered Execution
             </div>
-            <div className="mt-2 font-medium text-white/90">
+            <div className="mt-2 text-white">
               Actions run step-by-step, reliably.
             </div>
           </div>
