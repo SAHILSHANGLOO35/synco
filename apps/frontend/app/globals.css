@@ -4,6 +4,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 :root {
   --red-hat-display: var(--font-red-hat-display);
   --background: oklch(1 0 0);
