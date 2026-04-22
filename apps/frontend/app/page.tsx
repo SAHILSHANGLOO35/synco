@@ -1,3 +1,5 @@
+"use client"
+
 import { CTA } from "@/components/cta"
 import { Footer } from "@/components/footer"
 import { Hero } from "@/components/hero"
@@ -12,7 +14,7 @@ export default function Home() {
   return (
     <div className="min-h-dvh bg-[#0A0A0A]">
       <Navbar />
-      <div className="z-20 mx-auto max-w-7xl border-x border-rose-600/40 pt-32">
+      <div className="z-20 mx-auto max-w-7xl overflow-x-clip border-x border-rose-600/40 pt-20 sm:pt-24 md:pt-32">
         <Hero />
         <Separator />
         <div className="relative h-[200dvh]">
@@ -39,11 +41,11 @@ export default function Home() {
           </div>
         </div>
         <Separator />
-        <div className="py-16">
+        <div className="py-8 sm:py-20 md:py-16">
           <Testimonials />
         </div>
         <Separator />
-        <div className="pt-16">
+        <div className="py-8 sm:py-20 md:py-16">
           <CTA />
         </div>
         <Separator />

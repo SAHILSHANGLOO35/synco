@@ -6,19 +6,22 @@ import { NavButtons } from "./nav-buttons"
 
 export const Navbar = () => {
   return (
-    <div className="fixed top-0 z-50 w-full border-b border-rose-600/40 bg-[#0A0A0A] font-red-hat-display">
+    <div className="fixed top-0 z-50 w-screen border-b border-rose-600/40 bg-[#0A0A0A] font-red-hat-display">
       <Container>
         <div
-          className="flex h-16 cursor-pointer items-center justify-between border-x border-rose-600/40 px-4 font-bold tracking-wide text-white uppercase"
+          className="flex h-16 cursor-pointer items-center justify-between border-x border-rose-600/40 px-2 font-bold tracking-wide text-white uppercase sm:h-14 sm:px-4"
           onClick={() => (window.location.href = "/")}
         >
-          <div className="flex items-center justify-center gap-2">
-            <WorkflowIcon className="text-rose-500" size={24} />
-            <div className="text-xl">
+          {/* LOGO */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            <WorkflowIcon className="text-rose-500" size={18} />
+            <div className="text-lg md:text-xl">
               syn<span className="text-rose-500">co</span>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-5">
+
+          {/* BUTTONS */}
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-5">
             <NavButtons text="Sign In" />
             <NavButtons text="Sign Up" />
           </div>

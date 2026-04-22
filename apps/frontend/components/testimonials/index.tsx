@@ -52,7 +52,7 @@ export const Testimonials = () => {
         <h1 className="text-md font-sans leading-tight font-medium tracking-wide text-white uppercase">
           Trusted By Teams Worldwide
         </h1>
-        <div className="max-w-4xl text-center text-3xl font-bold text-rose-500/80">
+        <div className="max-w-4xl text-center text-lg font-bold text-rose-500/80 sm:text-2xl md:text-3xl">
           {users[0].review}
         </div>
         <div className="mx-auto mt-4 flex max-w-4xl">
