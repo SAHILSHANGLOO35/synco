@@ -49,14 +49,14 @@ export const Testimonials = () => {
   return (
     <Container>
       <div className="flex w-full flex-col items-center gap-4 font-red-hat-display md:gap-12">
-        <h1 className="md:text-md font-sans text-lg leading-tight font-medium tracking-wide text-white uppercase">
+        <h1 className="text-md font-sans leading-tight font-medium tracking-wide text-white uppercase">
           Trusted By Teams Worldwide
         </h1>
         <div className="max-w-4xl text-center text-3xl font-bold text-rose-500/80">
           {users[0].review}
         </div>
         <div className="mx-auto mt-4 flex max-w-4xl">
-          <div className="flex gap-4 mask-r-from-50% mask-l-from-50% md:gap-32">
+          <div className="flex gap-4 overflow-visible mask-r-from-50% mask-l-from-50% py-2 md:gap-32">
             {users.map((user, idx) => (
               <div
                 key={idx}

@@ -1,3 +1,5 @@
+import { CTA } from "@/components/cta"
+import { Footer } from "@/components/footer"
 import { Hero } from "@/components/hero"
 import { Navbar } from "@/components/navbar"
 import { SectionWrapper } from "@/components/section-wrapper"
@@ -41,7 +43,11 @@ export default function Home() {
           <Testimonials />
         </div>
         <Separator />
-        <div className="pt-16"></div>
+        <div className="pt-16">
+          <CTA />
+        </div>
+        <Separator />
+        <Footer />
       </div>
     </div>
   )
