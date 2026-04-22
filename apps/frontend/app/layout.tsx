@@ -36,13 +36,13 @@ export const metadata: Metadata = {
 
   creator: "Sahil Shangloo",
 
-  metadataBase: new URL("https://synco.vercel.app"),
+  metadataBase: new URL("https://synco-rust.vercel.app/"),
 
   openGraph: {
     title: "Synco - Event Driven Automation",
     description:
       "Connect events to actions. Build reliable workflows using webhooks and structured execution.",
-    url: "",
+    url: "https://synco-rust.vercel.app/",
     siteName: "Synco",
     images: [
       {
