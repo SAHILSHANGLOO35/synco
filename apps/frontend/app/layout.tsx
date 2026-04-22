@@ -22,6 +22,52 @@ export const metadata: Metadata = {
   title: "Synco",
   description:
     "Synco is an automation platform that links triggers and actions across apps, helping you build powerful workflows without complexity.",
+
+  keywords: [
+    "workflow automation",
+    "webhook automation",
+    "event driven system",
+    "triggers and actions",
+    "no code automation",
+    "synco",
+  ],
+
+  authors: [{ name: "Sahil Shangloo" }],
+
+  creator: "Sahil Shangloo",
+
+  metadataBase: new URL("https://synco.vercel.app"),
+
+  openGraph: {
+    title: "Synco - Event Driven Automation",
+    description:
+      "Connect events to actions. Build reliable workflows using webhooks and structured execution.",
+    url: "",
+    siteName: "Synco",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Synco Automation Platform Preview",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Synco - Event Driven Automation",
+    description:
+      "Triggers in. Actions out. Build workflows without complexity.",
+    images: ["/og-image.png"],
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 }
 
 export default function RootLayout({

@@ -12,13 +12,13 @@ export const Hero = () => {
         suppressHydrationWarning
       >
         {/* Small tag */}
-        <div className="font-sans text-xs font-semibold tracking-wider text-white uppercase">
+        <div className="font-sans text-xs font-medium tracking-wider text-white uppercase">
           no code automation
         </div>
 
         {/* Heading + Description */}
         <div className="flex flex-col items-center gap-3">
-          <h1 className="text-center text-3xl leading-tight font-semibold tracking-wide text-white md:text-4xl">
+          <h1 className="text-center text-3xl leading-tight font-medium tracking-wide text-white md:text-4xl">
             Triggers In. Actions Out. Everything Synced.
           </h1>
 

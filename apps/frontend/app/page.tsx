@@ -2,6 +2,7 @@ import { Hero } from "@/components/hero"
 import { Navbar } from "@/components/navbar"
 import { SectionWrapper } from "@/components/section-wrapper"
 import { Separator } from "@/components/separator"
+import { Testimonials } from "@/components/testimonials"
 import { RefreshCcwDot } from "lucide-react"
 import { Workflow } from "lucide-react"
 
@@ -9,13 +10,13 @@ export default function Home() {
   return (
     <div className="min-h-dvh bg-[#0A0A0A]">
       <Navbar />
-      <div className="z-20 mx-auto max-w-7xl border-x border-neutral-500/20 pt-32">
+      <div className="z-20 mx-auto max-w-7xl border-x border-rose-600/40 pt-32">
         <Hero />
         <Separator />
         <div className="relative h-[200dvh]">
           <div className="sticky top-16 left-0 z-20 h-dvh w-full">
             <SectionWrapper
-              image="/images/dashboard-synco.png"
+              image="/images/image-1.png"
               icon={RefreshCcwDot}
               title="SYNC ENGINE"
               subtitle="Connect events to actions"
@@ -26,7 +27,7 @@ export default function Home() {
 
           <div className="sticky top-16 left-0 z-30 h-dvh w-full">
             <SectionWrapper
-              image="/images/syncflow-synco.png"
+              image="/images/image-2.png"
               icon={Workflow}
               title="EXECUTION FLOW"
               subtitle="Run every workflow reliably"
@@ -36,7 +37,11 @@ export default function Home() {
           </div>
         </div>
         <Separator />
-        <div className="mt-16"></div>
+        <div className="py-16">
+          <Testimonials />
+        </div>
+        <Separator />
+        <div className="pt-16"></div>
       </div>
     </div>
   )

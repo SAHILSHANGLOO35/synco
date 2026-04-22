@@ -6,10 +6,10 @@ import { NavButtons } from "./nav-buttons"
 
 export const Navbar = () => {
   return (
-    <div className="fixed top-0 z-50 w-full border-b border-rose-600/20 bg-[#0A0A0A] font-red-hat-display">
+    <div className="fixed top-0 z-50 w-full border-b border-rose-600/40 bg-[#0A0A0A] font-red-hat-display">
       <Container>
         <div
-          className="flex h-16 cursor-pointer items-center justify-between border-x border-rose-600/20 px-4 font-bold tracking-wide text-white uppercase"
+          className="flex h-16 cursor-pointer items-center justify-between border-x border-rose-600/40 px-4 font-bold tracking-wide text-white uppercase"
           onClick={() => (window.location.href = "/")}
         >
           <div className="flex items-center justify-center gap-2">
