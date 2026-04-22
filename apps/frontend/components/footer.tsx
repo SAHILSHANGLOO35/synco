@@ -4,7 +4,7 @@ import { Container } from "./container"
 export const Footer = () => {
   return (
     <Container className="py-8">
-      <div className="flex items-center justify-between px-4 font-red-hat-display text-white">
+      <div className="flex items-center justify-between px-2 font-red-hat-display text-white md:px-4">
         <div className="font-mono text-base font-medium text-neutral-400">
           @ 2026 SYNCO. All rights reserved.
         </div>

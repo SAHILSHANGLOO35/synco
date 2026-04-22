@@ -25,17 +25,17 @@ export const SectionWrapper = ({
     <Container>
       <div
         className={cn(
-          "flex h-dvh w-full items-center font-red-hat-display",
+          "flex min-h-dvh w-full items-center px-2 font-red-hat-display md:px-0",
           className
         )}
       >
-        <div className="relative grid h-137.5 flex-1 grid-cols-2 gap-2 border-y border-neutral-500/20">
+        <div className="relative grid h-auto min-h-125 flex-1 grid-cols-1 gap-2 border-y border-neutral-500/20 md:h-137.5 md:grid-cols-2">
           <span className="absolute top-0 left-0 h-2 w-2 border-t border-l border-rose-600 transition-colors" />
           <span className="absolute top-0 right-0 h-2 w-2 border-t border-r border-rose-600 transition-colors" />
           <span className="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-rose-600 transition-colors" />
           <span className="absolute right-0 bottom-0 h-2 w-2 border-r border-b border-rose-600 transition-colors" />
 
-          <div className="relative h-full w-full overflow-hidden p-1">
+          <div className="relative h-70 w-full overflow-hidden p-1 sm:h-90 md:h-full">
             <DitherShader
               src="/images/dither-synco.jpeg"
               gridSize={1}
@@ -53,17 +53,17 @@ export const SectionWrapper = ({
             />
           </div>
 
-          <div className="flex flex-col justify-center gap-6 bg-[#121212] p-16">
+          <div className="flex flex-col justify-center gap-4 bg-[#121212] p-8 sm:p-12 md:gap-6 md:p-16">
             <div className="flex items-center gap-1 text-xs text-rose-500">
               <Icon size={18} />
               <span className="text-[14px] font-semibold text-rose-500 uppercase">
                 {subtitle}
               </span>
             </div>
-            <h1 className="text-5xl font-bold tracking-wide text-white">
+            <h1 className="text-3xl font-bold tracking-wide text-white sm:text-4xl md:text-5xl">
               {title}
             </h1>
-            <p className="font-medium text-muted-foreground md:text-base">
+            <p className="text-sm font-medium text-muted-foreground md:text-base">
               {description}
             </p>
             <Link

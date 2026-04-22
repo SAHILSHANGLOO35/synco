@@ -22,11 +22,11 @@ export const Hero = () => {
             Triggers In. Actions Out. Everything Synced.
           </h1>
 
-          <span className="max-w-xl text-center text-sm leading-relaxed font-medium tracking-wide text-muted-foreground md:text-base">
+          <div className="max-w-md text-center text-sm leading-relaxed font-medium tracking-wide text-muted-foreground md:max-w-xl md:text-base">
             Synco is an automation platform that links triggers and actions
             across apps, helping you build powerful workflows without
             complexity.
-          </span>
+          </div>
         </div>
 
         {/* Buttons */}
@@ -45,7 +45,7 @@ export const Hero = () => {
         </div>
 
         <LogoMarquee />
-        <div className="mt-4 w-full md:mt-8">
+        <div className="mt-4 mb-8 w-full md:mt-8 md:mb-16">
           <TabularInfo />
         </div>
       </div>
