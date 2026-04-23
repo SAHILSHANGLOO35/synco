@@ -6,7 +6,7 @@ export const Footer = () => {
     <Container className="py-8">
       <div className="flex items-center justify-between px-2 font-red-hat-display text-white md:px-4">
         <div className="font-mono text-base font-medium text-neutral-400">
-          @ 2026 SYNCO. All rights reserved.
+          @ 2026 Synco. All rights reserved.
         </div>
         <div className="group flex items-center gap-2 font-mono text-base font-medium text-neutral-400">
           <span>Created</span>
