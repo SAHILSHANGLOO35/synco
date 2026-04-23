@@ -10,7 +10,6 @@ export const SectionWrapper = ({
   title,
   subtitle,
   description,
-  link,
   className,
 }: {
   image: string
@@ -67,7 +66,7 @@ export const SectionWrapper = ({
               {description}
             </p>
             <Link
-              href={link}
+              href="/signin"
               className="flex w-fit items-center gap-3 rounded-xs border border-black/20 bg-linear-to-b from-rose-600 to-rose-500 px-3 py-2 text-sm font-bold text-white shadow-[0px_0.75px_0px_0px_rgba(255,252,252,0.3)_inset,0px_1px_5px_0px_rgba(0,0,0,0.75)] transition-colors duration-200 ease-in-out text-shadow-2xs hover:from-rose-600/80"
             >
               Start Building
