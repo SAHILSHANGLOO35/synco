@@ -29,6 +29,7 @@ export default function Signup() {
         title: "Account Created",
         description: "Your account was created successfully. Now Sign In.",
         type: "success",
+        timeout: 1500,
       })
 
       setName("")
@@ -45,18 +46,24 @@ export default function Signup() {
             id: Date.now().toString(),
             title: "Validation Error",
             description: firstError.message,
+            type: "error",
+            timeout: 1500,
           })
         } else if (data?.message) {
           toastManager.add({
             id: Date.now().toString(),
             title: "Signup Failed",
             description: data.message,
+            type: "error",
+            timeout: 1500,
           })
         } else {
           toastManager.add({
             id: Date.now().toString(),
             title: "Error",
             description: "Something went wrong",
+            type: "error",
+            timeout: 1500,
           })
         }
       } else {
@@ -64,6 +71,8 @@ export default function Signup() {
           id: Date.now().toString(),
           title: "Error",
           description: "Unexpected error occurred",
+          type: "error",
+          timeout: 1500,
         })
       }
     } finally {
@@ -89,45 +98,53 @@ export default function Signup() {
         </div>
       </div>
 
-      <div className="mb-4 flex flex-col gap-2">
-        <div className="text-[14px] text-neutral-400">Username</div>
-        <input
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          type="text"
-          placeholder="Enter your username"
-          className="w-87.5 rounded-xs border border-white/10 bg-transparent px-4 py-3 text-white placeholder-neutral-400 transition-all duration-300 outline-none hover:border-rose-500 focus:border-rose-500 focus:ring-2 focus:ring-rose-700/50 sm:w-100"
-        />
-
-        <div className="text-[14px] text-neutral-400">Email</div>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="email"
-          placeholder="Enter your email"
-          className="w-87.5 rounded-xs border border-white/10 bg-transparent px-4 py-3 text-white placeholder-neutral-400 transition-all duration-300 outline-none hover:border-rose-500 focus:border-rose-500 focus:ring-2 focus:ring-rose-700/50 sm:w-100"
-        />
-
-        <div className="text-[14px] text-neutral-400">Password</div>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          type="password"
-          placeholder="Enter your password"
-          className="w-87.5 rounded-xs border border-white/10 bg-transparent px-4 py-3 text-white placeholder-neutral-400 transition-all duration-300 outline-none hover:border-rose-500 focus:border-rose-500 focus:ring-2 focus:ring-rose-700/50 sm:w-100"
-        />
-      </div>
-
-      <button
-        className="flex w-87.5 cursor-pointer items-center justify-center rounded-md bg-rose-600 px-4 py-3 font-medium text-neutral-50 transition-colors duration-300 outline-none text-shadow-2xs hover:bg-linear-to-r hover:from-rose-600 hover:to-red-500 sm:w-100"
-        onClick={handleSignup}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSignup()
+        }}
       >
-        {loading ? <Loader2 className="animate-spin" /> : "Sign Up"}
-      </button>
+        <div className="mb-4 flex flex-col gap-2">
+          <div className="text-[14px] text-neutral-400">Username</div>
+          <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            type="text"
+            placeholder="Enter your username"
+            className="w-87.5 rounded-xs border border-white/10 bg-transparent px-4 py-3 text-white placeholder-neutral-400 transition-all duration-300 outline-none hover:border-rose-500 focus:border-rose-500 focus:ring-2 focus:ring-rose-700/50 sm:w-100"
+          />
 
-      <div className="flex items-center justify-center text-[14px] text-neutral-400">
-        Ready to enjoy the features of Synco.
-      </div>
+          <div className="text-[14px] text-neutral-400">Email</div>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="Enter your email"
+            className="w-87.5 rounded-xs border border-white/10 bg-transparent px-4 py-3 text-white placeholder-neutral-400 transition-all duration-300 outline-none hover:border-rose-500 focus:border-rose-500 focus:ring-2 focus:ring-rose-700/50 sm:w-100"
+          />
+
+          <div className="text-[14px] text-neutral-400">Password</div>
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            type="password"
+            placeholder="Enter your password"
+            className="w-87.5 rounded-xs border border-white/10 bg-transparent px-4 py-3 text-white placeholder-neutral-400 transition-all duration-300 outline-none hover:border-rose-500 focus:border-rose-500 focus:ring-2 focus:ring-rose-700/50 sm:w-100"
+          />
+        </div>
+
+        <button
+          className="flex w-87.5 cursor-pointer items-center justify-center rounded-md bg-rose-600 px-4 py-3 font-medium text-neutral-50 transition-colors duration-300 outline-none text-shadow-2xs hover:bg-linear-to-r hover:from-rose-600 hover:to-red-500 sm:w-100"
+          type="submit"
+          onClick={handleSignup}
+        >
+          {loading ? <Loader2 className="animate-spin" /> : "Sign Up"}
+        </button>
+
+        <div className="flex items-center justify-center text-[14px] text-neutral-400">
+          Ready to enjoy the features of Synco.
+        </div>
+      </form>
     </>
   )
 }
