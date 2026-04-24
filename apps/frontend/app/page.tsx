@@ -3,17 +3,17 @@
 import { CTA } from "@/components/cta"
 import { Footer } from "@/components/footer"
 import { Hero } from "@/components/hero"
-import { Navbar } from "@/components/navbar"
+import { LandingNavbar } from "@/components/landing-navbar"
 import { SectionWrapper } from "@/components/section-wrapper"
 import { Separator } from "@/components/separator"
-import { Testimonials } from "@/components/testimonials"
+import { Testimonials } from "@/components/testimonials/page"
 import { RefreshCcwDot } from "lucide-react"
 import { Workflow } from "lucide-react"
 
 export default function Home() {
   return (
     <div className="min-h-dvh bg-[#0A0A0A]">
-      <Navbar />
+      <LandingNavbar />
       <div className="z-20 mx-auto max-w-7xl overflow-x-clip border-x border-rose-600/40 pt-20 sm:pt-24 md:pt-32">
         <Hero />
         <Separator />

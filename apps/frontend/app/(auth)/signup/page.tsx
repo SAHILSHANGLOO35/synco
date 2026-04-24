@@ -141,7 +141,7 @@ export default function Signup() {
           {loading ? <Loader2 className="animate-spin" /> : "Sign Up"}
         </button>
 
-        <div className="flex items-center justify-center text-[14px] text-neutral-400">
+        <div className="flex items-center justify-center pt-2 text-[14px] text-neutral-400">
           Ready to enjoy the features of Synco.
         </div>
       </form>

@@ -29,7 +29,7 @@ export default function SignInPage() {
       )
       setEmail("")
       setPassword("")
-      router.push("/")
+      router.push("/dashboard")
     } catch (err) {
       if (axios.isAxiosError(err)) {
         const data = err.response?.data
@@ -126,7 +126,7 @@ export default function SignInPage() {
           {loading ? <Loader2 className="animate-spin" /> : "Sign In"}
         </button>
 
-        <div className="flex items-center justify-center text-[14px] text-neutral-400">
+        <div className="flex items-center justify-center pt-2 text-[14px] text-neutral-400">
           Continue to enjoy the features of Synco.
         </div>
       </form>
