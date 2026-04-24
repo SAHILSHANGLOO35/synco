@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, Red_Hat_Display } from "next/font/google"
 import "./globals.css"
+import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -81,7 +82,11 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${redHatDisplay.variable} h-full antialiased`}
     >
-      <body className="flex min-h-screen flex-col">{children}</body>
+      <body className="flex min-h-screen flex-col">
+        <ToastProvider position="bottom-right">
+          <AnchoredToastProvider>{children}</AnchoredToastProvider>
+        </ToastProvider>
+      </body>
     </html>
   )
 }
