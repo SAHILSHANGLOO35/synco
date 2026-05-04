@@ -8,6 +8,7 @@ const router = Router()
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const userId = req.userId
+    const body = req.body
 
     if (!userId) {
       return res.status(401).json({

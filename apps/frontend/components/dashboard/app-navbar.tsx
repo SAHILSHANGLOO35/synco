@@ -7,7 +7,7 @@ export const AppNavbar = () => {
     <div className="w-full border-b border-rose-600/40 font-red-hat-display">
       <div className="flex h-16 items-center justify-between font-bold tracking-wide text-white">
         {/* LOGO */}
-        <div className="flex h-full w-64 shrink-0 items-center gap-2 border-r border-rose-600/40 px-4 uppercase">
+        <div className="flex h-full w-48 shrink-0 items-center gap-2 border-r border-rose-600/40 px-4 uppercase md:w-64">
           <WorkflowIcon className="text-rose-500" size={18} />
           <div className="hidden text-lg md:block md:text-xl">
             syn<span className="text-rose-500">co</span>
