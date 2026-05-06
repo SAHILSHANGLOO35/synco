@@ -1,14 +1,16 @@
 "use client"
 
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { ChevronRight, Workflow } from "lucide-react"
+import { LuLayoutDashboard } from "react-icons/lu"
+import { BiLeftArrowAlt } from "react-icons/bi"
+import axios from "axios"
 import { NavButtons } from "@/components/nav-buttons"
 import { API } from "@/config"
 import { useAvailableTriggersAndActions } from "@/hooks/use-available-triggers-and-actions"
-import axios from "axios"
-import { ChevronRight, Workflow } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { useState, useEffect } from "react"
-import { LuLayoutDashboard } from "react-icons/lu"
-import { BiLeftArrowAlt } from "react-icons/bi"
+import { SolanaSelector } from "@/components/selectors/solana-selector"
+import { EmailSelector } from "@/components/selectors/email-selector"
 
 type Option = {
   id: string
@@ -38,11 +40,13 @@ export default function CreateSync() {
     useAvailableTriggersAndActions()
 
   const handleSelect = (option: Option | null) => {
+    // if no option is selected
     if (!option) {
       setSelectedModalIndex(null)
       return
     }
 
+    // if option is selected
     if (selectedModalIndex === 1) {
       setSelectedTrigger(option)
     } else if (selectedModalIndex !== null) {
@@ -62,6 +66,7 @@ export default function CreateSync() {
     setSelectedModalIndex(null)
   }
 
+  // publishable check before publishing the sync
   const isPublishable =
     !!selectedTrigger?.id &&
     selectedActions.length > 0 &&
@@ -69,7 +74,7 @@ export default function CreateSync() {
 
   return (
     <div className="flex h-screen flex-col font-red-hat-display">
-      {/* Top bar — unchanged */}
+      {/* Top bar */}
       <div className="flex h-12 items-center justify-between pr-4 pl-12 text-white">
         <div
           className="flex h-full cursor-pointer items-center transition-all duration-200 hover:text-rose-600"
@@ -257,18 +262,18 @@ function Connector({ short = false }: { short?: boolean }) {
 }
 
 type ModalProps = {
+  index: number
   isOpen: boolean
   onClose: () => void
-  index: number
   onSelect: (option: Option | null) => void
   options: Option[]
 }
 
 export function Modal({
+  index,
   isOpen,
   onClose,
   onSelect,
-  index,
   options,
 }: ModalProps) {
   const [step, setStep] = useState(0)
@@ -488,94 +493,6 @@ export function Modal({
           )}
         </div>
       </div>
-    </div>
-  )
-}
-
-function EmailSelector({
-  setMetadata,
-}: {
-  setMetadata: (params: { email: string; body: string }) => void
-}) {
-  const [email, setEmail] = useState("")
-  const [body, setBody] = useState("")
-
-  return (
-    <div className="flex w-full flex-col justify-center gap-4 px-2 text-white">
-      <div className="flex flex-col gap-0.5">
-        <label className="text-sm text-neutral-400" htmlFor="to">
-          To*
-        </label>
-        <input
-          id="to"
-          type="email"
-          placeholder="goat@gmail.com"
-          onChange={(e) => setEmail(e.target.value)}
-          className="flex items-center gap-2.5 rounded-sm border border-white/8 bg-white/4 px-3 py-2.5 transition outline-none focus-within:border-white/20"
-        />
-      </div>
-      <div className="flex flex-col gap-0.5">
-        <label className="text-sm text-neutral-400" htmlFor="body">
-          Body*
-        </label>
-        <input
-          id="body"
-          type="text"
-          placeholder="Body"
-          onChange={(e) => setBody(e.target.value)}
-          className="flex items-center gap-2.5 rounded-sm border border-white/8 bg-white/4 px-3 py-2.5 transition outline-none focus-within:border-white/20"
-        />
-      </div>
-      <button
-        className="rounded-sm border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/50 transition hover:bg-white/10 hover:text-white/80"
-        onClick={() => setMetadata({ email, body })}
-      >
-        Submit Details
-      </button>
-    </div>
-  )
-}
-
-function SolanaSelector({
-  setMetadata,
-}: {
-  setMetadata: (params: { address: string; amount: number }) => void
-}) {
-  const [amount, setAmount] = useState<number | 0>(0)
-  const [address, setAddress] = useState("")
-
-  return (
-    <div className="flex flex-col gap-4 px-2 text-white">
-      <div className="flex flex-col">
-        <label className="text-sm text-neutral-400" htmlFor="amount">
-          Amount*
-        </label>
-        <input
-          id="amount"
-          type="number"
-          placeholder="Amount in SOL"
-          onChange={(e) => setAmount(Number(e.target.value))}
-          className="flex items-center gap-2.5 rounded-sm border border-white/8 bg-white/4 px-3 py-2.5 transition outline-none focus-within:border-white/20"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label className="text-sm text-neutral-400" htmlFor="address">
-          Address
-        </label>
-        <input
-          id="address"
-          type="text"
-          placeholder="Address*"
-          onChange={(e) => setAddress(e.target.value)}
-          className="flex items-center gap-2.5 rounded-sm border border-white/8 bg-white/4 px-3 py-2.5 transition outline-none focus-within:border-white/20"
-        />
-      </div>
-      <button
-        className="rounded-sm border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/50 transition hover:bg-white/10 hover:text-white/80"
-        onClick={() => setMetadata({ amount, address })}
-      >
-        Submit Details
-      </button>
     </div>
   )
 }
