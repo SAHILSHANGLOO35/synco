@@ -20,12 +20,13 @@ model User {
 }
 
 model Sync {
-  id       String    @id @default(uuid())
-  trigger  Trigger?
-  actions  Action[]
-  syncRuns SyncRun[]
-  userId   String
-  user     User      @relation(fields: [userId], references: [id])
+  id        String    @id @default(uuid())
+  trigger   Trigger?
+  actions   Action[]
+  syncRuns  SyncRun[]
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
 }
 
 model SyncRun {

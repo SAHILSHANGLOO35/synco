@@ -29,6 +29,7 @@ export interface Sync {
       image: string
     }
   }
+  createdAt: Date
 }
 
 export function useSync() {
