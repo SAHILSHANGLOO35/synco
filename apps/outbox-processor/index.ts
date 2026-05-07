@@ -1,7 +1,7 @@
 import { Kafka } from "kafkajs"
 import { prisma } from "db/client"
 
-const TOPIC_NAME = "sync-events"
+const TOPIC_NAME = "synco-events"
 
 const kafka = new Kafka({
   clientId: "outbox-processor",
@@ -21,7 +21,7 @@ async function main() {
     await producer.send({
       topic: TOPIC_NAME,
       messages: pendingRows.map((r) => ({
-        value: r.syncRunId,
+        value: JSON.stringify({ syncRunId: r.syncRunId, stage: 0 }),
       })),
     })
 
