@@ -66,16 +66,6 @@ async function main() {
         return
       }
 
-      // 🔍 Debug: inspect what's actually in DB
-      console.log(
-        "currentAction.metadata:",
-        JSON.stringify(currentAction.metadata, null, 2)
-      )
-      console.log(
-        "syncRunMetadata:",
-        JSON.stringify(syncRunDetails.metadata, null, 2)
-      )
-
       const syncRunMetadata = syncRunDetails.metadata
       const metadata = (
         typeof currentAction.metadata === "string"
