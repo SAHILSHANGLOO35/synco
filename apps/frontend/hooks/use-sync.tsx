@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 
 export interface Sync {
   id: string
+  name: string
   triggerId: string
   userId: number
   actions: {
@@ -52,5 +53,5 @@ export function useSync() {
       })
   }, [])
 
-  return { loading, syncs }
+  return { loading, syncs, setSyncs }
 }

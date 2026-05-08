@@ -21,6 +21,7 @@ model User {
 
 model Sync {
   id        String    @id @default(uuid())
+  name      String    @default("Untitled Sync")
   trigger   Trigger?
   actions   Action[]
   syncRuns  SyncRun[]

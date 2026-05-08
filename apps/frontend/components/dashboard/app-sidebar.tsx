@@ -8,13 +8,16 @@ import {
 } from "lucide-react"
 
 import { SidebarIcon } from "@phosphor-icons/react"
-import { SidebarButton } from "../app-sidebar/sidebar-button"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { SidebarButton } from "../app-sidebar/sidebar-button"
 import { cn } from "@/lib/utils"
 
 export const AppSidebar = () => {
   const [activeTab, setActiveTab] = useState("dashboard")
   const [isOpen, setIsOpen] = useState(true)
+
+  const router = useRouter()
 
   return (
     <div
@@ -78,7 +81,10 @@ export const AppSidebar = () => {
           text="Dashboard"
           active={activeTab === "dashboard"}
           isOpen={isOpen}
-          onClick={() => setActiveTab("dashboard")}
+          onClick={() => {
+            setActiveTab("dashboard")
+            router.push("/dashboard")
+          }}
         />
 
         <SidebarButton

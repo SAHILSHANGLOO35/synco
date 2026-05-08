@@ -164,13 +164,16 @@ export const SyncTable = ({ syncs }: { syncs: Sync[] }) => {
 
                   {/* Sync ID */}
                   <div className="col-span-4 hidden flex-col gap-0.5 md:flex">
-                    <span className="truncate text-[11px] font-semibold text-white transition-colors duration-200 sm:text-[12px]">
+                    <span className="text-[14px] font-semibold tracking-wide">
+                      {sync.name}
+                    </span>
+                    <span className="truncate text-[11px] font-semibold text-white/60 transition-colors duration-200 sm:text-[12px]">
                       {sync.id}
                     </span>
                   </div>
 
                   {/* Created At */}
-                  <div className="col-span-2 text-center text-[11px] font-medium text-white sm:text-[12px] md:col-span-1">
+                  <div className="col-span-2 text-center text-[11px] font-medium text-white sm:text-[13px] md:col-span-1">
                     <span className="hidden md:inline">
                       {rowDate.toLocaleDateString("en-US", {
                         month: "short",

@@ -26,12 +26,12 @@ export function SolanaSelector({
       </div>
       <div className="flex flex-col">
         <label className="text-sm text-neutral-400" htmlFor="address">
-          Address
+          Address*
         </label>
         <input
           id="address"
           type="text"
-          placeholder="Address*"
+          placeholder="Address"
           onChange={(e) => setAddress(e.target.value)}
           className="flex items-center gap-2.5 rounded-sm border border-white/8 bg-white/4 px-3 py-2.5 transition outline-none focus-within:border-white/20"
         />
