@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { ChevronRight, Workflow } from "lucide-react"
-import { LuLayoutDashboard } from "react-icons/lu"
 import { BiLeftArrowAlt } from "react-icons/bi"
 import axios from "axios"
 import { NavButtons } from "@/components/nav-buttons"
@@ -11,6 +10,7 @@ import { API } from "@/config"
 import { useAvailableTriggersAndActions } from "@/hooks/use-available-triggers-and-actions"
 import { SolanaSelector } from "@/components/selectors/solana-selector"
 import { EmailSelector } from "@/components/selectors/email-selector"
+import { useSyncName } from "@/context/sync-name-context"
 
 type Option = {
   id: string
@@ -30,11 +30,14 @@ type Action = {
 export default function CreateSync() {
   const router = useRouter()
 
+  const { syncName } = useSyncName()
+
   const [selectedTrigger, setSelectedTrigger] = useState<Option | null>(null)
   const [selectedActions, setSelectedActions] = useState<Action[]>([])
   const [selectedModalIndex, setSelectedModalIndex] = useState<number | null>(
     null
   )
+  const [publishing, setPublishing] = useState(false)
 
   const { availableTriggers, availableActions } =
     useAvailableTriggersAndActions()
@@ -73,43 +76,59 @@ export default function CreateSync() {
     selectedActions.every((a) => a.availableActionId !== "")
 
   return (
-    <div className="flex h-screen flex-col font-red-hat-display">
+    <div className="flex h-full flex-col font-red-hat-display">
       {/* Top bar */}
-      <div className="flex h-12 items-center justify-between pr-4 pl-12 text-white">
-        <div
-          className="flex h-full cursor-pointer items-center transition-all duration-200 hover:text-rose-600"
-          onClick={() => router.push("/dashboard")}
-        >
-          <LuLayoutDashboard size={20} />
+      <div className="flex h-12 items-center justify-between p-10 pr-4 text-white">
+        <div className="flex h-full flex-col justify-center">
+          {/* <LuLayoutDashboard size={20} /> */}
+          <span className="text-base">Your Automation Flows</span>
+          <span className="text-[13px] tracking-wide text-muted-foreground">
+            Create and manage your Work Flows with Synco
+          </span>
         </div>
         <NavButtons
-          text="Publish"
-          disabled={!isPublishable}
+          text="Publish Sync"
+          loading={publishing}
+          disabled={!isPublishable || publishing}
           onClick={async () => {
-            if (!selectedTrigger?.id) return
+            try {
+              setPublishing(true)
 
-            // Filter out any actions that haven't been configured yet
-            const filledActions = selectedActions.filter(
-              (action) => action.availableActionId !== ""
-            )
+              if (!selectedTrigger?.id) return
 
-            if (filledActions.length === 0) return // optionally warn the user
+              const filledActions = selectedActions.filter(
+                (action) => action.availableActionId !== ""
+              )
 
-            await axios.post(
-              `${API}/api/v1/sync`,
-              {
-                availableTriggerId: selectedTrigger.id,
-                triggerMetadata: {},
-                actions: selectedActions.map((action) => ({
-                  availableActionId: action.availableActionId,
-                  actionMetadata: action.metadata,
-                })),
-              },
-              {
-                withCredentials: true,
-              }
-            )
-            router.push("/dashboard")
+              if (filledActions.length === 0) return
+
+              const res = await axios.post(
+                `${API}/api/v1/sync`,
+                {
+                  availableTriggerId: selectedTrigger.id,
+                  triggerMetadata: {},
+                  actions: selectedActions.map((action) => ({
+                    availableActionId: action.availableActionId,
+                    actionMetadata: action.metadata,
+                  })),
+                },
+                {
+                  withCredentials: true,
+                }
+              )
+
+              await axios.put(
+                `${API}/api/v1/sync/${res.data.syncId}/name`,
+                { name: syncName },
+                { withCredentials: true }
+              )
+
+              router.push("/dashboard")
+            } catch (error) {
+              console.error(error)
+            } finally {
+              setPublishing(false)
+            }
           }}
         />
       </div>
@@ -203,7 +222,7 @@ function FlowNode({
   return (
     <button
       onClick={onClick}
-      className={`group flex w-full max-w-md items-center gap-4 rounded-md border px-5 py-4 text-left transition-all duration-150 ${
+      className={`group flex w-full max-w-md items-center gap-4 rounded-sm border px-5 py-4 text-left transition-all duration-150 ${
         isEmpty
           ? "border-dashed border-white/15 bg-white/3 hover:border-white/30 hover:bg-white/6"
           : "border-white/10 bg-white/6 hover:border-white/20 hover:bg-white/10"
@@ -211,14 +230,14 @@ function FlowNode({
     >
       {/* Icon / image */}
       <div
-        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${isEmpty ? "border border-dashed border-white/20 bg-white/5" : "bg-white/10"} `}
+        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-sm ${isEmpty ? "border border-dashed border-white/20 bg-white/5" : "bg-white/10"} `}
       >
         {image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={image}
             alt={name ?? label}
-            className="h-6 w-6 rounded-full object-cover"
+            className="h-6 w-6 rounded-sm object-cover"
           />
         ) : (
           <span className="text-lg text-white/30">
@@ -321,7 +340,7 @@ export function Modal({
             {step === 1 && (
               <button
                 onClick={() => setStep(0)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border-white/10 text-white/50 transition hover:border-white/20 hover:bg-white/10 hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-sm border-white/10 text-white/50 transition hover:border-white/20 hover:bg-white/10 hover:text-white"
               >
                 <BiLeftArrowAlt />
               </button>
@@ -340,7 +359,7 @@ export function Modal({
           <button
             onClick={onClose}
             aria-label="Close"
-            className="flex h-8 w-8 items-center justify-center rounded-full text-white/40 transition duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-sm text-white/40 transition duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
           >
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
               <path
@@ -435,7 +454,7 @@ export function Modal({
                   <img
                     src={image}
                     alt={name}
-                    className="h-8 w-8 shrink-0 rounded-xl object-cover ring-1 ring-white/10"
+                    className="h-8 w-8 shrink-0 rounded-sm object-cover ring-1 ring-white/10"
                   />
                   <span className="flex-1 text-sm font-medium text-white/80 transition group-hover:text-white">
                     {name}

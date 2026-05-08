@@ -8,7 +8,6 @@ const router = Router()
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const userId = req.userId
-    const body = req.body
 
     if (!userId) {
       return res.status(401).json({
@@ -96,6 +95,52 @@ router.post("/", authMiddleware, async (req, res) => {
         message: err.message,
       })
     }
+
+    return res.status(500).json({
+      message: "Internal server error",
+    })
+  }
+})
+
+router.put("/:syncId/name", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.userId
+    const { syncId } = req.params
+    const { name } = req.body
+
+    if (!userId) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      })
+    }
+
+    if (!name || typeof name !== "string") {
+      return res.status(400).json({
+        message: "Name is required",
+      })
+    }
+
+    const updatedSync = await prisma.sync.update({
+      where: {
+        id: syncId as string,
+        userId,
+      },
+      data: {
+        name,
+      },
+    })
+
+    if (!updatedSync) {
+      return res.status(404).json({
+        message: "Sync not found",
+      })
+    }
+
+    return res.status(200).json({
+      message: "Sync name updated successfully",
+    })
+  } catch (error) {
+    console.error(error)
 
     return res.status(500).json({
       message: "Internal server error",
